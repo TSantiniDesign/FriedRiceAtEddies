@@ -20,6 +20,7 @@ public class HidingEnemy : MonoBehaviour
     [SerializeField] private TMP_Text hideText;
     private bool isSafe = false;
     [SerializeField] private List<DoorEnemies> doorEnemies = new List<DoorEnemies>();
+    private bool isPaused = false;
 
     /// <summary>
     /// When the game starts, the timer begins decreasing by one every second.
@@ -81,20 +82,27 @@ public class HidingEnemy : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
+    /// <summary>
+    /// When this coroutine is called, the two door enemies will stop in place for a set amount of time, then return
+    /// to moving like normal.
+    /// </summary>
     private IEnumerator PauseDoors()
     {
+        isPaused = true;
+
+        yield return new WaitForSeconds(5);
+
+        isPaused = false;
         foreach (DoorEnemies x in doorEnemies)
         {
-            x.Speed = 0;
-            print(x.Speed);
-            yield return new WaitForSeconds(5);
-            x.Speed = 5;
+           x.Speed = 5;
         }
     }
 
     /// <summary>
-    /// While the countdown timer is less than 5, the warning text is active. If the countdown reaches 0 and isSafe 
-    /// is not true, the player dies. If isSafe is true, the countdown timer resets.
+    /// While the countdown timer is less than 5, the warning text is active, and the PauseDoors coroutine is started.
+    /// If the countdown reaches 0 and isSafe is not true, the player dies. If isSafe is true, the countdown 
+    /// timer resets.
     /// </summary>
     void Update()
     {
@@ -106,6 +114,14 @@ public class HidingEnemy : MonoBehaviour
         else
         {
             hideText.gameObject.SetActive(false);
+        }
+
+        if (isPaused == true)
+        {
+            foreach (DoorEnemies x in doorEnemies)
+            {
+                x.Speed = 0;
+            }
         }
 
         if (countdownTimer == 0)

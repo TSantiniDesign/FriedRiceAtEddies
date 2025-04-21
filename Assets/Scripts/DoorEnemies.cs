@@ -19,6 +19,8 @@ public class DoorEnemies : MonoBehaviour
     private int currentIndex;
     [SerializeField] private GameObject door;
     [SerializeField] private TMP_Text deathText;
+    [SerializeField] private DoorEnemies doorEnemies;
+    [SerializeField] private GameObject player;
 
     public float Speed { get => speed; set => speed = value; }
 
@@ -36,6 +38,7 @@ public class DoorEnemies : MonoBehaviour
     /// </summary>
     private void Die()
     {
+        transform.position = player.transform.position;
         Invoke("ReloadScene", 1.5f);
     }
 
@@ -70,8 +73,10 @@ public class DoorEnemies : MonoBehaviour
 
             if (currentIndex == 0)
             {
+                doorEnemies.speed = 5;
                 if (door.activeSelf == false)
                 {
+                    speed = 0;
                     deathText.text = "You died to the Door enemy";
                     deathText.gameObject.SetActive(true);
                     Die();
@@ -82,6 +87,12 @@ public class DoorEnemies : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position,
                         movePoints[currentIndex].transform.position, speed * Time.deltaTime);
                 }
+            }
+            else if (currentIndex == 2)
+            {
+                print("door enemy is here");
+                speed = 5;
+                doorEnemies.speed = 0;
             }
             else
             {
