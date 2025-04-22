@@ -17,6 +17,7 @@ public class RewindVCR : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text deathText;
     private int countdownTimer = 30;
+    [SerializeField] private AudioClip tickSound;
 
     /// <summary>
     /// When the game starts, the timer begins counting down at a standard rate.
@@ -43,6 +44,7 @@ public class RewindVCR : MonoBehaviour
     /// </summary>
     void TimerDecrease()
     {
+        AudioSource.PlayClipAtPoint(tickSound, transform.position, 1);
         countdownTimer--;
         timerText.text = countdownTimer.ToString();
     }
@@ -81,11 +83,11 @@ public class RewindVCR : MonoBehaviour
     }
 
     /// <summary>
-    /// Uses the scene manager to send the player back to the main menu.
+    /// Uses the scene manager to send the player to the game over screen.
     /// </summary>
     void ReloadScene()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("GameOver");
     }
 
     /// <summary>

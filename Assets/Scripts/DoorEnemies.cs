@@ -21,6 +21,10 @@ public class DoorEnemies : MonoBehaviour
     [SerializeField] private TMP_Text deathText;
     [SerializeField] private DoorEnemies doorEnemies;
     [SerializeField] private GameObject player;
+    [SerializeField] private AudioSource groanSound;
+    [SerializeField] private AudioSource deathSound;
+    private bool hasPlayed;
+    [SerializeField] private Vector3 offset;
 
     public float Speed { get => speed; set => speed = value; }
 
@@ -38,16 +42,17 @@ public class DoorEnemies : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        transform.position = player.transform.position;
+        deathSound.Play();
+        transform.position = player.transform.position + offset;
         Invoke("ReloadScene", 1.5f);
     }
 
     /// <summary>
-    /// Uses the scene manager to send the player back to the main menu.
+    /// Uses the scene manager to send the player to the game over screen.
     /// </summary>
     void ReloadScene()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("GameOver");
     }
 
     /// <summary>
@@ -55,7 +60,7 @@ public class DoorEnemies : MonoBehaviour
     /// within a certain distance, it adds one to the index, and moves to the next point. When it reaches the maximum
     /// length of the index, it resets, and restarts the order.
     /// 
-    /// When the index reaches 0, the position outside the door, is the door is not active, the player dies, but if
+    /// When the index reaches 0, the position outside the door, if the door is not active, the player dies, but if
     /// the door is closed, the enemy quickly rushes back to its starting position.
     /// </summary>
     void Update()
@@ -73,6 +78,7 @@ public class DoorEnemies : MonoBehaviour
 
             if (currentIndex == 0)
             {
+                hasPlayed = false;
                 doorEnemies.speed = 5;
                 if (door.activeSelf == false)
                 {
@@ -90,7 +96,12 @@ public class DoorEnemies : MonoBehaviour
             }
             else if (currentIndex == 2)
             {
-                print("door enemy is here");
+                if (!hasPlayed)
+                {
+                    hasPlayed = true;
+                    //AudioSource.PlayClipAtPoint(groanSound, transform.position, 2);
+                    groanSound.Play();
+                }
                 speed = 5;
                 doorEnemies.speed = 0;
             }

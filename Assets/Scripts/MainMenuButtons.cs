@@ -12,11 +12,19 @@ using UnityEngine.SceneManagement;
 public class MainMenuButtons : MonoBehaviour
 {
     /// <summary>
-    /// Loads the first level
+    /// Loads the first level.
     /// </summary>
     public void StartScene()
     {
         SceneManager.LoadSceneAsync("LevelOne");
+    }
+
+    /// <summary>
+    /// Loads the Main Menu.
+    /// </summary>
+    public void LoadMenu()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     /// <summary>

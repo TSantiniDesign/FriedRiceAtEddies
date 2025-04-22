@@ -21,6 +21,8 @@ public class HidingEnemy : MonoBehaviour
     private bool isSafe = false;
     [SerializeField] private List<DoorEnemies> doorEnemies = new List<DoorEnemies>();
     private bool isPaused = false;
+    [SerializeField] private AudioClip screamSound;
+    private bool hasPlayed = false;
 
     /// <summary>
     /// When the game starts, the timer begins decreasing by one every second.
@@ -75,11 +77,11 @@ public class HidingEnemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Uses the scene manager to send the player back to the main menu.
+    /// Uses the scene manager to send the player to the game over screen.
     /// </summary>
     void ReloadScene()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("GameOver");
     }
 
     /// <summary>
@@ -88,10 +90,16 @@ public class HidingEnemy : MonoBehaviour
     /// </summary>
     private IEnumerator PauseDoors()
     {
+        if (!hasPlayed)
+        {
+            hasPlayed = true;
+            AudioSource.PlayClipAtPoint(screamSound, transform.position, 2);
+        }
         isPaused = true;
 
         yield return new WaitForSeconds(5);
 
+        hasPlayed = false;
         isPaused = false;
         foreach (DoorEnemies x in doorEnemies)
         {
