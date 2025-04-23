@@ -62,6 +62,9 @@ public class DoorEnemies : MonoBehaviour
     /// within a certain distance, it adds one to the index, and moves to the next point. When it reaches the maximum
     /// length of the index, it resets, and restarts the order.
     /// 
+    /// Each time it reaches a new point, it will get a random speed, except for the last two, which set the speed to
+    /// 5, and on the last one, the groaning noise plays.
+    /// 
     /// When the index reaches 0, the position outside the door, if the door is not active, the player dies, but if
     /// the door is closed, the enemy quickly rushes back to its starting position.
     /// </summary>
@@ -101,7 +104,6 @@ public class DoorEnemies : MonoBehaviour
                 if (!hasPlayed)
                 {
                     hasPlayed = true;
-                    //AudioSource.PlayClipAtPoint(groanSound, transform.position, 2);
                     groanSound.Play();
                 }
                 speed = 5;

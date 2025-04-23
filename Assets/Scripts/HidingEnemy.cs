@@ -104,7 +104,6 @@ public class HidingEnemy : MonoBehaviour
         {
             hasPlayed = true;
             warnSound.Play();
-            //AudioSource.PlayClipAtPoint(screamSound, transform.position, 30);
         }
         isPaused = true;
 
@@ -119,7 +118,8 @@ public class HidingEnemy : MonoBehaviour
     }
 
     /// <summary>
-    /// While the countdown timer is less than 5, the warning text is active, and the PauseDoors coroutine is started.
+    /// While the countdown timer is less than 5, the screeching noise is played, and the PauseDoors coroutine
+    /// is started.
     /// If the countdown reaches 0 and isSafe is not true, the player dies. If isSafe is true, the countdown 
     /// timer resets.
     /// </summary>

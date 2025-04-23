@@ -27,6 +27,9 @@ public class MainMenuButtons : MonoBehaviour
         SceneManager.LoadSceneAsync("LevelOne");
     }
 
+    /// <summary>
+    /// Loads the second level.
+    /// </summary>
     public void LevelTwo()
     {
         SceneManager.LoadSceneAsync("LevelTwo");

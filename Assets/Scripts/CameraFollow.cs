@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
 
     /// <summary>
-    /// Happens a fraction of a second after Update and FixedUpdate
+    /// Happens a fraction of a second after Update and FixedUpdate, follows the player at an offset.
     /// </summary>
     private void LateUpdate()
     {
