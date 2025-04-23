@@ -18,6 +18,11 @@ public class RewindVCR : MonoBehaviour
     [SerializeField] private TMP_Text deathText;
     private int countdownTimer = 30;
     [SerializeField] private AudioClip tickSound;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject television;
+    [SerializeField] private Vector3 offset;
+    private bool hasDied = false;
 
     /// <summary>
     /// When the game starts, the timer begins counting down at a standard rate.
@@ -54,7 +59,10 @@ public class RewindVCR : MonoBehaviour
     /// </summary>
     void RewindFunction()
     {
-        countdownTimer++;
+        if (countdownTimer <= 59)
+        {
+            countdownTimer++;
+        }
         timerText.text = countdownTimer.ToString();
     }
 
@@ -76,6 +84,8 @@ public class RewindVCR : MonoBehaviour
     /// </summary>
     private void Die()
     {
+        deathSound.Play();
+        television.transform.position = player.transform.position + offset;
         CancelInvoke("TimerDecrease");
         deathText.text = "You died to the VCR enemy";
         deathText.gameObject.SetActive(true);
@@ -97,7 +107,11 @@ public class RewindVCR : MonoBehaviour
     {
         if (countdownTimer <= 0)
         {
-            Die();
+            if (!hasDied)
+            {
+                Die();
+                hasDied = true;
+            }
         }
     }
 }

@@ -73,7 +73,7 @@ public class RiceEating : MonoBehaviour
     /// </summary>
     void ReloadScene()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("WinScene");
     }
 
     /// <summary>

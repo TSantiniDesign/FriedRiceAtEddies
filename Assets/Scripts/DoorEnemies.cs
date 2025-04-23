@@ -25,6 +25,8 @@ public class DoorEnemies : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
     private bool hasPlayed;
     [SerializeField] private Vector3 offset;
+    [SerializeField] private int minSpeed;
+    [SerializeField] private int maxSpeed;
 
     public float Speed { get => speed; set => speed = value; }
 
@@ -38,7 +40,7 @@ public class DoorEnemies : MonoBehaviour
     }
 
     /// <summary>
-    /// Invokes the ReloadScene function after a slight delay.
+    /// Invokes the ReloadScene function after a slight delay, and moves the enemy to the player's location.
     /// </summary>
     private void Die()
     {
@@ -83,8 +85,8 @@ public class DoorEnemies : MonoBehaviour
                 if (door.activeSelf == false)
                 {
                     speed = 0;
-                    deathText.text = "You died to the Door enemy";
-                    deathText.gameObject.SetActive(true);
+                    //deathText.text = "You died to the Door enemy";
+                    //deathText.gameObject.SetActive(true);
                     Die();
                 }
                 else
@@ -94,7 +96,7 @@ public class DoorEnemies : MonoBehaviour
                         movePoints[currentIndex].transform.position, speed * Time.deltaTime);
                 }
             }
-            else if (currentIndex == 2)
+            else if (currentIndex == 5)
             {
                 if (!hasPlayed)
                 {
@@ -105,9 +107,13 @@ public class DoorEnemies : MonoBehaviour
                 speed = 5;
                 doorEnemies.speed = 0;
             }
+            else if (currentIndex == 4)
+            {
+                speed = 5;
+            }
             else
             {
-                speed = 4.5f; //Random.Range(4, 7);
+                speed = Random.Range(minSpeed, maxSpeed);
                 transform.position = Vector3.MoveTowards(transform.position,
                     movePoints[currentIndex].transform.position, speed * Time.deltaTime);
             }

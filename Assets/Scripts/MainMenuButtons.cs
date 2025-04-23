@@ -4,7 +4,7 @@
 // Creation Date : March 25th, 2025 
 //
 // Brief Description : This script is for the main menu buttons, creating 
-functions that, when called, will load the first level or quit the game.
+functions that, when called, will load the various levels or quit the game.
 *****************************************************************************/
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,11 +12,24 @@ using UnityEngine.SceneManagement;
 public class MainMenuButtons : MonoBehaviour
 {
     /// <summary>
-    /// Loads the first level.
+    /// Loads the second level.
     /// </summary>
     public void StartScene()
     {
+        SceneManager.LoadSceneAsync("LevelThree");
+    }
+
+    /// <summary>
+    /// Loads the first level.
+    /// </summary>
+    public void LevelOne()
+    {
         SceneManager.LoadSceneAsync("LevelOne");
+    }
+
+    public void LevelTwo()
+    {
+        SceneManager.LoadSceneAsync("LevelTwo");
     }
 
     /// <summary>

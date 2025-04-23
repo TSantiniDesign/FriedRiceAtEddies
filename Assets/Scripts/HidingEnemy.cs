@@ -22,7 +22,15 @@ public class HidingEnemy : MonoBehaviour
     [SerializeField] private List<DoorEnemies> doorEnemies = new List<DoorEnemies>();
     private bool isPaused = false;
     [SerializeField] private AudioClip screamSound;
+    [SerializeField] private AudioSource warnSound;
+    [SerializeField] private AudioSource deathSound;
     private bool hasPlayed = false;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject creature;
+    [SerializeField] private Vector3 offset;
+    private bool hasDied = false;
+    [SerializeField] private int minTimer;
+    [SerializeField] private int maxTimer;
 
     /// <summary>
     /// When the game starts, the timer begins decreasing by one every second.
@@ -65,14 +73,16 @@ public class HidingEnemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops the timer from decreasing further, activates the death text and changes it to show what enemy they died
-    /// to, then invokes the ReloadScene function after a slight delay.
+    /// Stops the timer from decreasing further, plays the jumpscare sound, moves the enemy to the player's position,
+    /// then invokes the ReloadScene function after a slight delay.
     /// </summary>
     private void Die()
     {
+        deathSound.Play();
+        creature.transform.position = player.transform.position + offset;
         CancelInvoke("TimerDecrease");
-        deathText.text = "You died to the Hiding enemy";
-        deathText.gameObject.SetActive(true);
+        //deathText.text = "You died to the Hiding enemy";
+        //deathText.gameObject.SetActive(true);
         Invoke("ReloadScene", 1.5f);
     }
 
@@ -93,11 +103,12 @@ public class HidingEnemy : MonoBehaviour
         if (!hasPlayed)
         {
             hasPlayed = true;
-            AudioSource.PlayClipAtPoint(screamSound, transform.position, 2);
+            warnSound.Play();
+            //AudioSource.PlayClipAtPoint(screamSound, transform.position, 30);
         }
         isPaused = true;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
 
         hasPlayed = false;
         isPaused = false;
@@ -117,12 +128,12 @@ public class HidingEnemy : MonoBehaviour
         if (countdownTimer < 5)
         {
             StartCoroutine(PauseDoors());
-            hideText.gameObject.SetActive(true);
+            //hideText.gameObject.SetActive(true);
         }
-        else
-        {
-            hideText.gameObject.SetActive(false);
-        }
+        //else
+        //{
+            //hideText.gameObject.SetActive(false);
+        //}
 
         if (isPaused == true)
         {
@@ -137,11 +148,16 @@ public class HidingEnemy : MonoBehaviour
 
             if(isSafe == false)
             {
-                Die();
+                if(!hasDied)
+                {
+                    Die();
+                    hasDied = true;
+                }
+                
             }
             else
             {
-                countdownTimer = 60;
+                countdownTimer = Random.Range(minTimer, maxTimer);
             }
         }
     }
