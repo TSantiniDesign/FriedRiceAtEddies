@@ -170,7 +170,7 @@ MonoBehaviour:
   groanSound: {fileID: 4626258}
   deathSound: {fileID: 631680492}
   offset: {x: 0, y: -8, z: -3}
-  minSpeed: 5
+  minSpeed: 7
   maxSpeed: 20
 --- !u!65 &4626254
 BoxCollider:
@@ -5665,7 +5665,7 @@ MonoBehaviour:
   groanSound: {fileID: 941192138}
   deathSound: {fileID: 631680492}
   offset: {x: 0, y: -8, z: -3}
-  minSpeed: 5
+  minSpeed: 7
   maxSpeed: 20
 --- !u!65 &941192134
 BoxCollider:

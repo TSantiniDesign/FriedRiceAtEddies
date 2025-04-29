@@ -902,7 +902,7 @@ MonoBehaviour:
   groanSound: {fileID: 157001651}
   deathSound: {fileID: 2089732998}
   offset: {x: 0, y: -8, z: -3}
-  minSpeed: 5
+  minSpeed: 9
   maxSpeed: 20
 --- !u!82 &157001651
 AudioSource:
@@ -3226,7 +3226,7 @@ MonoBehaviour:
   groanSound: {fileID: 537538794}
   deathSound: {fileID: 2089732998}
   offset: {x: 0, y: -8, z: -3}
-  minSpeed: 5
+  minSpeed: 9
   maxSpeed: 20
 --- !u!1 &595534362
 GameObject:

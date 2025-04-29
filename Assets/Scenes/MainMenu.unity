@@ -845,8 +845,9 @@ MonoBehaviour:
     \non the buttons, and they will retreat back.\n\nVCR Enemy - Do not let the timer
     reach zero. Press up against\nthe gray button on the front of the TV to add more
     time.\n\nHiding Enemy - When you hear it screech, you will be required to hide
-    \nunderneath the main table, or else you will die.\n\nLevels:\nLevel One - Just
-    Door Enemies\nLevel Two - Door Enemies and VCR Enemy\nLevelThree - All Enemies"
+    \nunderneath the main table, or else you will die. When its screech ends, you\nwill
+    be safe to leave the table.\n\nLevels:\nLevel One - Just Door Enemies\nLevel
+    Two - Door Enemies and VCR Enemy\nLevelThree - All Enemies"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
