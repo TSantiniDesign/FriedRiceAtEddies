@@ -42,6 +42,22 @@ public class HidingEnemy : MonoBehaviour
     }
 
     /// <summary>
+    /// Cancels the current function being invoked.
+    /// </summary>
+    public void StopInvoke()
+    {
+        CancelInvoke();
+    }
+
+    /// <summary>
+    /// Invokes the timer decrease repeatedly.
+    /// </summary>
+    public void StartInvoke()
+    {
+        InvokeRepeating("TimerDecrease", 0, 1);
+    }
+
+    /// <summary>
     /// The countdown timer decreases by one.
     /// </summary>
     void TimerDecrease()
@@ -148,7 +164,7 @@ public class HidingEnemy : MonoBehaviour
         }
 
 
-        if (countdownTimer == 0)
+        if (countdownTimer <= 0)
         {
 
             if(isSafe == false)

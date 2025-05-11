@@ -16,12 +16,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput playerinput;
     [SerializeField] private float jumpValue = 5f;
     [SerializeField] private float playerSpeed = 15f;
+    [SerializeField] private GameObject enemies;
+    [SerializeField] private GameObject player;
+    [SerializeField] private HidingEnemy hidingEnemy;
+    [SerializeField] private RewindVCR rewindVCR;
 
     private Rigidbody rb;
     private Vector3 playerMovement;
 
     private bool jumpedOnce = false;
     private bool jumpedTwice = false;
+    private bool isPaused = false;
+    [SerializeField] private bool isThree;
+    [SerializeField] private bool isTwo;
 
     /// <summary>
     /// When the game starts, this script grabs the rigidbody attached to the player, and enables the current action
@@ -77,9 +84,47 @@ public class PlayerController : MonoBehaviour
         playerMovement.z = inputMovement.y * playerSpeed;
     }
 
+    /// <summary>
+    /// Returns the player to the main menu
+    /// </summary>
+    /// <param name="iValue">value read in from the keyboard</param>
     void OnReturn(InputValue iValue)
     {
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    void OnPause(InputValue iValue)
+    {
+        if (isPaused == false)
+        {
+            if (isThree == true)
+            {
+                hidingEnemy.StopInvoke();
+            }
+            if (isTwo == true)
+            {
+                rewindVCR.StopInvoke();
+            }
+            print("paused");
+            enemies.SetActive(false);
+            player.SetActive(false);
+            isPaused = true;
+        }
+        else
+        {
+            if (isThree == true)
+            {
+                hidingEnemy.StartInvoke();
+            }
+            if (isTwo == true)
+            {
+                rewindVCR.StartInvoke();
+            }
+            print("unpaused");
+            enemies.SetActive(true);
+            player.SetActive(true);
+            isPaused = false;
+        }
     }
 
     /// <summary>

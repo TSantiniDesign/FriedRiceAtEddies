@@ -33,6 +33,22 @@ public class RewindVCR : MonoBehaviour
     }
 
     /// <summary>
+    /// Cancels the current function being invoked.
+    /// </summary>
+    public void StopInvoke()
+    {
+        CancelInvoke();
+    }
+
+    /// <summary>
+    /// Invokes the timer decrease repeatedly.
+    /// </summary>
+    public void StartInvoke()
+    {
+        InvokeRepeating("TimerDecrease", 0, 1);
+    }
+
+    /// <summary>
     /// While the player is inside the trigger on the VCR rewind button, the time left will increase at a fast rate.
     /// </summary>
     /// <param name="other">The object that enters the trigger area</param>
