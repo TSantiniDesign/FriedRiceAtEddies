@@ -7,6 +7,7 @@
 input action map to allow the player to move in all four directionsand jump 
 based on the keys they press.
 *****************************************************************************/
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private HidingEnemy hidingEnemy;
     [SerializeField] private RewindVCR rewindVCR;
+    [SerializeField] private TMP_Text pauseText;
+    [SerializeField] private GameObject pausePanel;
 
     private Rigidbody rb;
     private Vector3 playerMovement;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isPaused = false;
     [SerializeField] private bool isThree;
     [SerializeField] private bool isTwo;
+    [SerializeField] private bool isTutorial;
 
     /// <summary>
     /// When the game starts, this script grabs the rigidbody attached to the player, and enables the current action
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerinput.currentActionMap.Enable();
+        //pausePanel = GameObject.FindGameObjectWithTag("Pause");
     }
 
     /// <summary>
@@ -93,6 +98,11 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
+    /// <summary>
+    /// When the player pauses, the player and enemies are set to inactive, and the pause text comes up. When they
+    /// unpause, the text goes away, and the player and enemies are set to active again.
+    /// </summary>
+    /// <param name="iValue">value read in from the keyboard</param>
     void OnPause(InputValue iValue)
     {
         if (isPaused == false)
@@ -108,6 +118,8 @@ public class PlayerController : MonoBehaviour
             print("paused");
             enemies.SetActive(false);
             player.SetActive(false);
+            pausePanel.SetActive(true);
+            pauseText.gameObject.SetActive(true);
             isPaused = true;
         }
         else
@@ -121,8 +133,13 @@ public class PlayerController : MonoBehaviour
                 rewindVCR.StartInvoke();
             }
             print("unpaused");
-            enemies.SetActive(true);
+            if (isTutorial == false)
+            {
+                enemies.SetActive(true);
+            }
             player.SetActive(true);
+            pausePanel.SetActive(false);
+            pauseText.gameObject.SetActive(false);
             isPaused = false;
         }
     }

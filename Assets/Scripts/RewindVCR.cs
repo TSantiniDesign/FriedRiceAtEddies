@@ -16,20 +16,24 @@ public class RewindVCR : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text deathText;
-    private int countdownTimer = 30;
+    [SerializeField] private int countdownTimer = 30;
     [SerializeField] private AudioClip tickSound;
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject television;
     [SerializeField] private Vector3 offset;
     private bool hasDied = false;
+    [SerializeField] private bool isTutorial;
 
     /// <summary>
     /// When the game starts, the timer begins counting down at a standard rate.
     /// </summary>
     private void Start()
     {
-        InvokeRepeating("TimerDecrease", 3, 1);
+        if (isTutorial == false)
+        {
+            InvokeRepeating("TimerDecrease", 3, 1);
+        }
     }
 
     /// <summary>
@@ -45,7 +49,10 @@ public class RewindVCR : MonoBehaviour
     /// </summary>
     public void StartInvoke()
     {
-        InvokeRepeating("TimerDecrease", 0, 1);
+        if (isTutorial == false)
+        {
+            InvokeRepeating("TimerDecrease", 0, 1);
+        }
     }
 
     /// <summary>
