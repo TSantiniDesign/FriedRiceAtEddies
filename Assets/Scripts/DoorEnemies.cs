@@ -27,8 +27,10 @@ public class DoorEnemies : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private int minSpeed;
     [SerializeField] private int maxSpeed;
+    [SerializeField] private float savedSpeed;
 
     public float Speed { get => speed; set => speed = value; }
+    public float SavedSpeed { get => savedSpeed; set => savedSpeed = value; }
 
     /// <summary>
     /// When the game starts, the current index is set to 0, ensuring that the first point the object will be at is
@@ -84,7 +86,7 @@ public class DoorEnemies : MonoBehaviour
             if (currentIndex == 0)
             {
                 hasPlayed = false;
-                doorEnemies.speed = 5;
+                doorEnemies.speed = doorEnemies.savedSpeed;
                 if (door.activeSelf == false)
                 {
                     speed = 0;
@@ -107,6 +109,7 @@ public class DoorEnemies : MonoBehaviour
                     groanSound.Play();
                 }
                 speed = 5;
+                doorEnemies.savedSpeed = doorEnemies.speed;
                 doorEnemies.speed = 0;
             }
             else if (currentIndex == 4)

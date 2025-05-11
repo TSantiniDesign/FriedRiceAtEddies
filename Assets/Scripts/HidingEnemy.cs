@@ -31,6 +31,7 @@ public class HidingEnemy : MonoBehaviour
     private bool hasDied = false;
     [SerializeField] private int minTimer;
     [SerializeField] private int maxTimer;
+    private bool corReady = true;
 
     /// <summary>
     /// When the game starts, the timer begins decreasing by one every second.
@@ -105,15 +106,25 @@ public class HidingEnemy : MonoBehaviour
             hasPlayed = true;
             warnSound.Play();
         }
-        isPaused = true;
+        if (!isPaused)
+        {
+            foreach (DoorEnemies x in doorEnemies)
+            {
+                x.SavedSpeed = x.Speed;
+                x.Speed = 0;
+            }
+            isPaused = true;
+        }
+        //isPaused = true;
 
         yield return new WaitForSeconds(10);
 
+        corReady = true;
         hasPlayed = false;
         isPaused = false;
         foreach (DoorEnemies x in doorEnemies)
         {
-           x.Speed = 5;
+           x.Speed = x.SavedSpeed;
         }
     }
 
@@ -125,23 +136,17 @@ public class HidingEnemy : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (countdownTimer < 5)
+        if (countdownTimer < 5 && corReady == true)
         {
+            corReady = false;
             StartCoroutine(PauseDoors());
-            //hideText.gameObject.SetActive(true);
+            hideText.gameObject.SetActive(true);
         }
-        //else
-        //{
-            //hideText.gameObject.SetActive(false);
-        //}
-
-        if (isPaused == true)
+        else
         {
-            foreach (DoorEnemies x in doorEnemies)
-            {
-                x.Speed = 0;
-            }
+            hideText.gameObject.SetActive(false);
         }
+
 
         if (countdownTimer == 0)
         {
