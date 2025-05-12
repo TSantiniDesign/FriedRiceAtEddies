@@ -118,8 +118,6 @@ public class RewindVCR : MonoBehaviour
         deathSound.Play();
         television.transform.position = player.transform.position + offset;
         CancelInvoke("TimerDecrease");
-        deathText.text = "You died to the VCR enemy";
-        deathText.gameObject.SetActive(true);
         Invoke("ReloadScene", 1.5f);
     }
 
