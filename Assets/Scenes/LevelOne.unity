@@ -1993,6 +1993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 846258889}
+  isTutorial: 0
+  rewindVCR: {fileID: 0}
 --- !u!65 &389320422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2670,6 +2672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1246499524}
+  isTutorial: 0
+  rewindVCR: {fileID: 0}
 --- !u!65 &532953207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5111,6 +5115,7 @@ MonoBehaviour:
   pausePanel: {fileID: 0}
   isThree: 0
   isTwo: 0
+  isTutorial: 0
 --- !u!114 &969275669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8413,8 +8418,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8861,11 +8866,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1633669680}
   deathText: {fileID: 875471543}
+  countdownTimer: 30
   tickSound: {fileID: 8300000, guid: 47fec227125f4eb418ae1afcd5d70525, type: 3}
   deathSound: {fileID: 2089732998}
   player: {fileID: 969275666}
   television: {fileID: 1722568041}
   offset: {x: 0, y: 0, z: 3}
+  isTutorial: 0
+  setFree: 0
+  cage: {fileID: 0}
 --- !u!65 &1730630688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9908,6 +9917,7 @@ MonoBehaviour:
   pausePanel: {fileID: 690435911}
   isThree: 0
   isTwo: 0
+  isTutorial: 0
 --- !u!114 &1882641628
 MonoBehaviour:
   m_ObjectHideFlags: 0
