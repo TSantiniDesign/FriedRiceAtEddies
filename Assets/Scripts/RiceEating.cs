@@ -20,7 +20,7 @@ public class RiceEating : MonoBehaviour
     [SerializeField] private int riceNeeded;
 
     /// <summary>
-    /// If the player exits the trigger area, the repeated invoke of EatFunction is started, which currently
+    /// If the player enters the trigger area, the repeated invoke of EatFunction is started, which currently
     /// repeats once every second.
     /// </summary>
     /// <param name="other">The object that enters the trigger area</param>

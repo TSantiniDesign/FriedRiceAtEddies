@@ -110,8 +110,7 @@ public class RewindVCR : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops the timer from decreasing further, activates the death text and changes it to show what enemy they died
-    /// to, then invokes the ReloadScene function after a slight delay.
+    /// Stops the timer from decreasing further, then invokes the ReloadScene function after a slight delay.
     /// </summary>
     private void Die()
     {

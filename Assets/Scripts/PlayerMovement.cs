@@ -4,8 +4,9 @@
 // Creation Date : March 20th, 2025 
 //
 // Brief Description : This script controls the player's movement, using the
-input action map to allow the player to move in all four directionsand jump 
-based on the keys they press.
+input action map to allow the player to move in all four directions and jump 
+based on the keys they press. It also lets the pause and return to the
+main menu.
 *****************************************************************************/
 using TMPro;
 using UnityEngine;

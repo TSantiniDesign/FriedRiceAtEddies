@@ -43,6 +43,9 @@ public class MainMenuButtons : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
+    /// <summary>
+    /// Loads the Tutorial Level
+    /// </summary>
     public void Tutorial()
     {
         SceneManager.LoadSceneAsync("Tutorial");
