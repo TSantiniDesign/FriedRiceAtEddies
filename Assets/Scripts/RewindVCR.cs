@@ -24,9 +24,12 @@ public class RewindVCR : MonoBehaviour
     [SerializeField] private Vector3 offset;
     private bool hasDied = false;
     [SerializeField] private bool isTutorial;
+    public int setFree;
+    [SerializeField] private GameObject cage;
+    private bool hasPressed = false;
 
     /// <summary>
-    /// When the game starts, the timer begins counting down at a standard rate.
+    /// When the game starts, the timer begins counting down at a standard rate, unless it is the tutorial.
     /// </summary>
     private void Start()
     {
@@ -45,7 +48,7 @@ public class RewindVCR : MonoBehaviour
     }
 
     /// <summary>
-    /// Invokes the timer decrease repeatedly.
+    /// Invokes the timer decrease repeatedly, unless it is the tutorial.
     /// </summary>
     public void StartInvoke()
     {
@@ -64,6 +67,11 @@ public class RewindVCR : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             InvokeRepeating("RewindFunction", 0, .15f);
+            if (isTutorial == true && hasPressed == false)
+            {
+                setFree++;
+                hasPressed = true;
+            }
         }
     }
 
@@ -135,6 +143,10 @@ public class RewindVCR : MonoBehaviour
                 Die();
                 hasDied = true;
             }
+        }
+        if (setFree >= 3)
+        {
+            cage.SetActive(false);
         }
     }
 }

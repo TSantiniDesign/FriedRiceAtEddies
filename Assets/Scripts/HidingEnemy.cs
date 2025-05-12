@@ -156,11 +156,6 @@ public class HidingEnemy : MonoBehaviour
         {
             corReady = false;
             StartCoroutine(PauseDoors());
-            hideText.gameObject.SetActive(true);
-        }
-        else
-        {
-            hideText.gameObject.SetActive(false);
         }
 
 

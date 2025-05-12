@@ -12,6 +12,9 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     [SerializeField] private GameObject door;
+    [SerializeField] private bool isTutorial;
+    [SerializeField] private RewindVCR rewindVCR;
+    private bool hasPressed = false;
 
     /// <summary>
     /// When the player enters the button trigger, the door is set to active.
@@ -22,6 +25,11 @@ public class DoorController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             door.SetActive(true);
+            if (isTutorial == true && hasPressed == false)
+            {
+                rewindVCR.setFree++;
+                hasPressed = true;
+            }
         }
     }
 

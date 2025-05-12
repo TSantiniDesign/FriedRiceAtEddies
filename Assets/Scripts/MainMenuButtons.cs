@@ -43,6 +43,11 @@ public class MainMenuButtons : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
+    public void Tutorial()
+    {
+        SceneManager.LoadSceneAsync("Tutorial");
+    }
+
     /// <summary>
     /// Quits the game and sets isPlaying to false.
     /// </summary>
